@@ -11,11 +11,21 @@ public struct VRViewRepresentable<View, Coordinator>: UIViewRepresentable where 
     public init(
         coordinator: @escaping () -> Coordinator,
         onMake: @escaping (Context) -> View,
-        onUpdate: ((View, Context) -> Void)? = nil
+        onUpdate: @escaping (View, Context) -> Void = { _,_ in }
     ) {
         self.coordinator = coordinator
         self.onMake = onMake
-        self.onUpdate = onUpdate ?? { _,_ in }
+        self.onUpdate = onUpdate
+    }
+    
+    public init(
+        coordinator: Coordinator,
+        onMake: @escaping (Context) -> View,
+        onUpdate: @escaping (View, Context) -> Void = { _,_ in }
+    ) {
+        self.coordinator = { coordinator }
+        self.onMake = onMake
+        self.onUpdate = onUpdate
     }
     
     public func makeCoordinator() -> Coordinator {
@@ -35,15 +45,21 @@ public struct VRViewRepresentable<View, Coordinator>: UIViewRepresentable where 
 @available(iOS 13.0, tvOS 13.0, *)
 extension VRViewRepresentable where Coordinator == Void {
 
-    public init(onMake: @escaping (Context) -> View, onUpdate: ((View, Context) -> Void)? = nil) {
+    public init(
+        onMake: @escaping (Context) -> View,
+        onUpdate: @escaping (View, Context) -> Void = { _,_ in }
+    ) {
         self.coordinator = {}
         self.onMake = onMake
-        self.onUpdate = onUpdate ?? { _,_ in }
+        self.onUpdate = onUpdate
     }
 
-    public init(onMake: @escaping () -> View, onUpdate: ((View) -> Void)? = nil) {
+    public init(
+        onMake: @escaping () -> View,
+        onUpdate: @escaping (View) -> Void = { _ in }
+    ) {
         self.coordinator = {}
         self.onMake = { _ in onMake() }
-        self.onUpdate = { view, context in onUpdate?(view) }
+        self.onUpdate = { view, context in onUpdate(view) }
     }
 }

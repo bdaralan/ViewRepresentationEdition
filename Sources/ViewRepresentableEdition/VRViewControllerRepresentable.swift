@@ -56,11 +56,11 @@ extension VRViewControllerRepresentable where Coordinator == Void {
 
     public init(
         onMake: @escaping () -> Controller,
-        onUpdate: @escaping (Controller, Context) -> Void = { _,_ in }
+        onUpdate: @escaping (Controller) -> Void = { _ in }
     ) {
         self.coordinator = {}
         self.onMake = { _ in onMake() }
-        self.onUpdate = onUpdate
+        self.onUpdate = { controller, context in onUpdate(controller) }
     }
 }
 
