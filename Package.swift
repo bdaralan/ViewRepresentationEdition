@@ -4,13 +4,13 @@
 import PackageDescription
 
 let package = Package(
-    name: "ViewRepresentableEdition",
+    name: "ViewRepresentationEdition",
     products: [
-        .library(name: "ViewRepresentableEdition", targets: ["ViewRepresentableEdition"]),
+        .library(name: "ViewRepresentationEdition", targets: ["ViewRepresentationEdition"]),
     ],
     dependencies: [],
     targets: [
-        .target(name: "ViewRepresentableEdition", dependencies: []),
-        .testTarget(name: "ViewRepresentableEditionTests", dependencies: ["ViewRepresentableEdition"]),
+        .target(name: "ViewRepresentationEdition", dependencies: []),
+        .testTarget(name: "ViewRepresentationEditionTests", dependencies: ["ViewRepresentationEdition"]),
     ]
 )

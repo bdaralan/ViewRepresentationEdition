@@ -2,7 +2,7 @@ import SwiftUI
 
 
 @available(iOS 13.0, tvOS 13.0, *)
-public struct VRViewRepresentable<View, Coordinator>: UIViewRepresentable where View: UIView {
+public struct VRViewRepresentation<View, Coordinator>: UIViewRepresentable where View: UIView {
 
     private let coordinator: () -> Coordinator
     private let onMake: (Context) -> View
@@ -43,7 +43,7 @@ public struct VRViewRepresentable<View, Coordinator>: UIViewRepresentable where 
 
 
 @available(iOS 13.0, tvOS 13.0, *)
-extension VRViewRepresentable where Coordinator == Void {
+extension VRViewRepresentation where Coordinator == Void {
 
     public init(
         onMake: @escaping (Context) -> View,
