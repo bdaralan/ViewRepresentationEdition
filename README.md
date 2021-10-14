@@ -1,3 +1,3 @@
-# ViewRepresentableEdition
+# ViewRepresentationEdition
 
-A description of this package.
+SwiftUI's view representation for `UIView` and `UIViewController`.
